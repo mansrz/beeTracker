@@ -1,0 +1,63 @@
+ <!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>BeeTracker | {% block tab %}{% endblock %}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Sistema de rastreo satelital powered by Enjambre" />
+    <meta name="keywords" content="tracking, rastreo, satelital, satelite, gps, GPS" />
+    <link rel="shortcut icon" href="{{STATIC_URL}}img/enja_black.png">
+    <!-- CSS -->
+    {% block style_css %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dosis:300,400,500">
+
+    <!-- Javascripts -->
+    {% block script %}{% endblock %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}/bootstrap/js/bootstrap.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+    
+  <script>
+    {% block script_action %}{% endblock %}
+  </script>
+  </head>
+  <body>
+    <!-- Banner -->
+     {% block banner %}{% endblock %}
+    <!-- End Banner -->
+
+    <!-- Menú -->
+     {% block menu %}{% endblock %}
+    <!-- End Menú -->
+
+    <!-- Center Panel -->
+     {% block center_panel %}{% endblock %}
+    <!-- End Center Panel  -->
+
+  	<!-- visor -->
+  	  {% block visor %}{% endblock %}
+  	<!-- End visor  -->
+
+    <!-- dashboard -->
+      {% block dashboard %}{% endblock %}
+    <!-- End dashboard  -->
+
+    <!-- Right Panel -->
+      {% block right_panel %}{% endblock %}
+    <!-- End Right Panel  -->
+
+    <!-- Left Panel -->
+      {% block left_panel %}{% endblock %}
+    <!-- End Left Panel  -->
+
+    <!-- Footer -->
+      {% block footer %}{% endblock %}
+    <!-- End Footer -->
+
+    <!-- Src -->
+      {% block src %}{% endblock %}
+    <!-- End src -->
+  </body>
+</html>
+	

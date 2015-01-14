@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block tab %}panel{% endblock %}
+
+{% block style_css %}
+  <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dashboard.css" />
+  <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/accordion.css" />
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block dashboard %}
+   <div id="dashboard">
+   	<div class="container">
+	    <div class="row">
+	        <div class="col-sm-12 col-md-12">
+	            <div id="containers">
+	                <h1 class="tittle">Accordion Menu With Icon</h1>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+   </div>
+{% include 'dashboard/menu.html' %}
+{% endblock %}

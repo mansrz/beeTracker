@@ -1,0 +1,63 @@
+<div id="panel" style="background-color:rgba(239, 240, 245, 0.35); float: right;  z-index: 10;position: absolute;right: 0;height: 100%;top: 0;width: 300px; overflow: scroll;">
+  <div style="top: 100px;height: 100px;width: 100%;">
+  <h4>{{user|capfirst}}</h4>
+  <h4>{{devices|length}} Dispositivos</h4>
+  <button type="button" class="btn btn-primary" onclick="location.href='/'">
+    <span class="glyphicon glyphicon-dashboard" ></span> Panel
+  </button>
+  <button type="button" class="btn btn-danger" onclick="location.href='/logout'">
+    <span class="glyphicon glyphicon-off" ></span> Salir
+  </button>
+  </div>
+  <div style="top: 100px;background-color:#76B100;height: 10px;width: 100%;">
+  </div>
+  <div style="top: 100px;width: 100%;">
+    {% for device in devices %}
+    <div style="padding-top: 5px;">
+    <a href="#">
+      <div class="row" id='device-{{device.id}}' style="margin-right: 0px;!important;">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+          <img src="{{MEDIA_URL}}{{device.picture}}" style="width: 60px;" alt="Responsive image">
+          </div>
+          <div class="col-lg-7 col-md-7 col-sm-7">
+            <b> <big>{{device.name|capfirst}} </big></b>
+          </div>
+      </div>
+    </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<img id="panel_button" src="{{STATIC_URL}}img/enja.png" style="float: right;  z-index: 10;position: absolute;right: 0;height: 90px;top: 0;width: 90px;">
+
+<script type="text/javascript">
+$('#panel').hide();
+  $('#panel_button').click(function(){
+    $('#panel').toggle(400);
+  });
+  if ( !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
+    $('#panel_button').mouseover(function(){
+      $('#panel').show(400);
+    });
+    $('#map').mouseover(function(){
+      $('#panel').hide(400);
+    });
+  }
+  $('#map').click(function(){
+    $('#panel').hide(400);
+  });
+
+  {% for device in devices %}
+  $('#device-{{device.id}}').click(function(){
+    if (flag{{device.id}}){
+        devices_list.splice(devices_list.indexOf({{device.id}}),1)
+        flag{{device.id}}=false;
+        $(this).css('background-color', 'rgba(239, 240, 245, 0.3490)');
+    }
+    else{devices_list[devices_list.length]={{device.id}}
+        $(this).css('background-color', 'rgba(118, 177, 0, 0.20)');
+    flag{{device.id}}=true;}
+  });
+  {% endfor %}
+</script>
