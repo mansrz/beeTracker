@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'jg38+0t!6q30i1z2!oimh#hlbox@9^@njs&oi1+4y^)2f^+gyf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
@@ -59,13 +59,9 @@ WSGI_APPLICATION = 'beeTracker.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'beeTrackerPostgres',
-        'USER': 'beetrackerapp',
-        'PASSWORD': 'BeeTrackerP0stgr3s',
-        'HOST': 'localhost',
-        'PORT': '5432',
-       }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 # Internationalization
