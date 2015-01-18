@@ -1,0 +1,6 @@
+     html { height: 100%;}
+     body { height: 100%; margin: 0px; padding: 0px; background-attachment: fixed;}
+     #dashboard { height: 100% }
+     #containers { height: 100%; width:100%}
+     .tittle { margin-left: 90px; text-align: center;}
+     .device_card{height: 260px; width:100%;border-style: solid;border-color: #21B3BF;}
