@@ -28,6 +28,17 @@
       disableDefaultUI: true,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+    var styles = {
+  'Greyscale': [
+    {              
+      featureType: 'all',
+      rules: [
+        {saturation: -100},
+        {gamma: 0.50}
+      ]
+    }
+  ]
+}
     map = new google.maps.Map(document.getElementById("map"),mapOptions);
     map.set('draggable', true);
 

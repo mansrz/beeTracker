@@ -13,16 +13,16 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dosis:300,400,500">
 
     <!-- Javascripts -->
-    {% block script %}{% endblock %}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}/bootstrap/js/bootstrap.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	  <script src="http://code.jquery.com/jquery-latest.js"></script>
+    {% block script %}{% endblock %}
     
   <script>
     {% block script_action %}{% endblock %}
   </script>
   </head>
-  <body>
+  <body background="/static/img/background2.jpg">
     <!-- Banner -->
      {% block banner %}{% endblock %}
     <!-- End Banner -->
