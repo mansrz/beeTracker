@@ -37,6 +37,9 @@ urlpatterns = patterns('',
     url(r'^new_position/$', 'tracker.views.newPosition', name='add a new position'),
     url(r'^new_checkPoint/$', 'tracker.views.newCheckPoint', name='add a new checkpoint'),
 
+    # TRANSESPOL
+    url(r'^transespol/$', 'tracker.views.transespol', name='TRANSESPOL'),
+
     # media files
     url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT,}),
 )

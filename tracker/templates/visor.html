@@ -28,17 +28,6 @@
       disableDefaultUI: true,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    var styles = {
-  'Greyscale': [
-    {              
-      featureType: 'all',
-      rules: [
-        {saturation: -100},
-        {gamma: 0.50}
-      ]
-    }
-  ]
-}
     map = new google.maps.Map(document.getElementById("map"),mapOptions);
     map.set('draggable', true);
 
@@ -64,7 +53,7 @@
           });
           
           // Set infoWindow
-          var infowindow = new google.maps.InfoWindow({content:"<p width ='120px' height= '50px'>"+data[0]+"<br>"+data[1]+"<br>"+data[2]+"<br>Lon: "+data[0]+"<br>Lat:"+data[1]+"</p>"});
+          var infowindow = new google.maps.InfoWindow({content:"<p width ='120px' height= '50px'><strong>"+data[3]+"</strong><br>"+data[2]+"<br>Lon: "+data[1]+"<br>Lat:"+data[0]+"</p>"});
 
           markers.push(marker);
           // Change the center of map.

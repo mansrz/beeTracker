@@ -12,12 +12,14 @@ import json
 @login_required(login_url='/login')
 def lastLocation(request, id_device):
     user=request.user
-    user_data = Supervisor.objects.get(user = user.id).devices.get(id =id_device).positions.last()
+    device = Supervisor.objects.get(user = user.id).devices.get(id =id_device)
+    user_data = device.positions.last()
     data_location = []
     data_location.append(user_data.latitude)
     data_location.append(user_data.longitude)
     data_location.append(user_data.speed)
-    
+    data_location.append(device.name)
+
     return HttpResponse(json.dumps(data_location))
 
 @login_required(login_url='/login')
@@ -159,3 +161,25 @@ def newPosition(request):
 @login_required(login_url='/logout')
 def newCheckPoint(request):
     pass
+
+'''
+TRANSESPOL START
+'''
+def transespol(request):
+    import requests, re
+    response = requests.session().post("http://fs.teccial.com:8081/WSEspol/interfaces/interfaceSeguridad.php", {"txt_user": "transespol", "txt_pass": "espol2"}).text
+    patronBus = re.compile('<(.+?)>')
+    patronInfo = re.compile('\((.+?)\)')
+    try:
+        buses = patronBus.findall(response)
+        buses[0]=buses[1]
+        for bus in buses:
+            de = Device.objects.get(name = patronInfo.findall(bus)[1])
+            de.positions.create(latitude = float(patronInfo.findall(bus)[3]), longitude= float(patronInfo.findall(bus)[2]))
+            de.save()
+    except:
+        pass
+    return HttpResponse(json.dumps(True))
+'''
+TRANSESPOL END
+'''
