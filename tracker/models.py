@@ -3,9 +3,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class CheckPoint(models.Model):
-    campo1 =  models.TextField(max_length=25)
-    campo2 =  models.TextField(max_length=25)
-    campo3 =  models.TextField(max_length=25)
+    campo1 =  models.TextField(max_length=25, blank= True, null= True)
+    campo2 =  models.TextField(max_length=25, blank= True, null= True)
+    campo3 =  models.TextField(max_length=25, blank= True, null= True)
     picture = models.ImageField(upload_to='checkPoint/%Y/%m/%d',verbose_name='Picture', null= True,  default='checkPoint/anonymous.png')
 
 class Position(models.Model):
@@ -27,7 +27,7 @@ class Device(models.Model):
     positions = models.ManyToManyField(Position, related_name='Positions', blank= True, null= True)
     name = models.TextField(max_length=20, blank= True, null= True)
     #supervisor = models.ForeignKey(Supervisor, related_name='Supervisor')
-    status = models.BooleanField(default=False)
+    status = models.BooleanField(default=True)
     description = models.TextField(max_length=50, blank= True, null= True)
     #Borrar modelo y version descomentar status y descripcion >> modificar newDeviceForm
     #model = models.TextField(max_length=12, blank= True, null= True)

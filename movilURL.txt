@@ -1,0 +1,32 @@
+http://104.236.91.181/
+>>> Login <<<
+
+GET
+	http://104.236.91.181/login/?next=/visor/
+POST
+	csrfmiddlewaretoken
+	username
+	password
+
+>>> New Device<<<
+
+GET
+	http://104.236.91.181/new_device/
+POST
+	csrfmiddlewaretoken (el nuevo)
+	username
+	password
+	name
+	(devuelve usermane, id_device, name, con el POST correcto, incorrecto logout)
+
+>>>New Position<<<
+GET
+	http://104.236.91.181/new_position/
+POST
+	csrfmiddlewaretoken (el nuevo)
+	sessionid
+	id_device
+	latitude
+	longitude
+	speed
+	(devuelve 1, con el POST correcto, incorrecto logout)

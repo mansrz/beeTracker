@@ -122,8 +122,7 @@ def newDevice(request):
         except:
             return HttpResponseRedirect('/logout/')
     else:
-        return HttpResponseRedirect('/logout/')
-    return HttpResponseRedirect('/logout/')
+        return render_to_response('movilPost/new_device.html',  RequestContext(request))
 
 @login_required(login_url='/logout')
 def newPosition(request):    
@@ -154,8 +153,7 @@ def newPosition(request):
         except:
             return HttpResponseRedirect('/logout/')
     else:
-        return HttpResponseRedirect('/logout/')
-    return HttpResponseRedirect('/logout/')
+        return render_to_response('movilPost/new_position.html',  RequestContext(request))
 
 
 @login_required(login_url='/logout')
