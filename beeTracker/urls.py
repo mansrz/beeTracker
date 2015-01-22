@@ -35,7 +35,7 @@ urlpatterns = patterns('',
     # movil app POST
     url(r'^new_device/$', 'tracker.views.newDevice', name='add a new device'),
     url(r'^new_position/$', 'tracker.views.newPosition', name='add a new position'),
-    url(r'^new_checkPoint/$', 'tracker.views.newCheckPoint', name='add a new checkpoint'),
+    url(r'^new_check_point/$', 'tracker.views.newCheckPoint', name='add a new checkpoint'),
 
     # checkpoints
     url(r'^check_point/(\d+)/$', 'tracker.views.checkPoints', name='get a checkpoint'),    

@@ -141,7 +141,7 @@ def newDevice(request):
     else:
         return render_to_response('movilPost/new_device.html',  RequestContext(request))
 
-@login_required(login_url='/logout')
+@login_required(login_url='/')
 def newPosition(request):    
     if request.method == 'POST':
         try:
