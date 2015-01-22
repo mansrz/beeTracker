@@ -37,6 +37,9 @@ urlpatterns = patterns('',
     url(r'^new_position/$', 'tracker.views.newPosition', name='add a new position'),
     url(r'^new_checkPoint/$', 'tracker.views.newCheckPoint', name='add a new checkpoint'),
 
+    # checkpoints
+    url(r'^check_point/(\d+)/$', 'tracker.views.checkPoints', name='get a checkpoint'),    
+
     # TRANSESPOL
     url(r'^transespol/$', 'tracker.views.transespol', name='TRANSESPOL'),
 

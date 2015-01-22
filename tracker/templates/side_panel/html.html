@@ -15,16 +15,83 @@
     {% for device in devices %}
     <div style="padding-top: 5px;">
     <a href="#">
-      <div class="row" id='device-{{device.id}}' style="margin-right: 0px;!important;">
-          <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="row" style="margin-right: 0px;!important;">
+          <div id='device-{{device.id}}' class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
           <img src="{{MEDIA_URL}}{{device.picture}}" style="width: 60px;" alt="Responsive image">
           </div>
-          <div class="col-lg-7 col-md-7 col-sm-7">
-            <b> <big>{{device.name|capfirst}} </big></b>
+          <div class="col-xs-8 col-md-8 col-sm-8 col-lg-8">
+            <div id='device-{{device.id}}'>
+            <b><big>{{device.name|capfirst}} </big></b>
+          </div>
+            <button type="button" id="showCheckPoint-{{device.id}}" class="btn btn-success">
+              <span class="glyphicon glyphicon-eye-open" ></span> Mostrar CheckPoints
+            </button>
+            <button type="button" id="hideCheckPoint-{{device.id}}" class="btn btn-danger">
+              <span class="glyphicon glyphicon-eye-close" ></span> Ocultar CheckPoints
+            </button>
           </div>
       </div>
     </a>
     </div>
+    <script type="text/javascript">
+      $('#hideCheckPoint-{{device.id}}').hide();
+      $('#showCheckPoint-{{device.id}}').click(function(){
+        $('#showCheckPoint-{{device.id}}').hide(200);
+        $('#hideCheckPoint-{{device.id}}').show(200);
+        var url_check_point = '/check_point/{{device.id}}/'
+        var markers_checkpoint_{{device.id}} = [];
+        var infoWindows = [];
+        $.getJSON(url_check_point,function(data){
+          for (var i = 0; i < data.length; i++) {
+            var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(data[i][0],data[i][1]),
+            map : map,
+            title : '{{device.name}}',
+            icon: "{{STATIC_URL}}img/marker.png",
+            html:"<p width ='120px' height= '50px'><strong>"+data[i][2]+"</strong><br>"+data[i][3]+"<br>Lon: "+data[i][4]+"<img width ='120px' src='{{MEDIA_URL}}"+data[i][5]+"'>"
+            });
+            // Set infoWindow
+            var infowindow = new google.maps.InfoWindow();
+            infoWindows.push(infowindow)
+
+            google.maps.event.addListener(marker, 'mouseover', function(){
+              infowindow.setContent(this.html)
+              infowindow.open(map, this);
+            });
+
+            markers_checkpoint_{{device.id}}.push(marker)
+          }   
+        });
+        $('#hideCheckPoint-{{device.id}}').click(function(){
+        deleteMarkers2()
+
+        $('#hideCheckPoint-{{device.id}}').hide(200);
+        $('#showCheckPoint-{{device.id}}').show(200);
+        });
+        // Sets the map on all markers in the array.
+        function setAllMap2(map) {
+          for (var i = 0; i < markers_checkpoint_{{device.id}}.length; i++) {
+            markers_checkpoint_{{device.id}}[i].setMap(map);
+          }
+        }
+
+        // Removes the markers from the map, but keeps them in the array.
+        function clearMarkers2() {
+          setAllMap2(null);
+        }
+
+        // Shows any markers currently in the array.
+        function showMarkers2() {
+          setAllMap2(map);
+        }
+
+        // Deletes all markers in the array by removing references to them.
+        function deleteMarkers2() {
+          clearMarkers2();
+          markers_checkpoint_{{device.id}} = [];
+        }
+      });
+    </script>
     {% endfor %}
   </div>
 </div>
@@ -54,9 +121,11 @@ $('#panel').hide();
         devices_list.splice(devices_list.indexOf({{device.id}}),1)
         flag{{device.id}}=false;
         $(this).css('background-color', 'rgba(239, 240, 245, 0.3490)');
+        $(this).css('color', 'rgba(66, 139, 202, 1)');
     }
     else{devices_list[devices_list.length]={{device.id}}
-        $(this).css('background-color', 'rgba(118, 177, 0, 0.20)');
+        $(this).css('background-color', 'rgba(33, 179, 191, 0.67)');
+        $(this).css('color', 'white');
     flag{{device.id}}=true;}
   });
   {% endfor %}

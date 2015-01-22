@@ -11,6 +11,7 @@ import json
 
 @login_required(login_url='/login')
 def lastLocation(request, id_device):
+    #mejorar el query, se tiene el id_device
     user=request.user
     device = Supervisor.objects.get(user = user.id).devices.get(id =id_device)
     user_data = device.positions.last()
@@ -21,6 +22,22 @@ def lastLocation(request, id_device):
     data_location.append(device.name)
 
     return HttpResponse(json.dumps(data_location))
+
+@login_required(login_url='/login')
+def checkPoints(request, id_device):
+    checkpoints = Device.objects.get(id = id_device).checkPoint.all()
+    checkpoints_data = []
+    for checkpoint in checkpoints:
+        cp = []
+        cp.append(checkpoint.latitude)
+        cp.append(checkpoint.longitude)
+        cp.append(checkpoint.campo1)
+        cp.append(checkpoint.campo2)
+        cp.append(checkpoint.campo3)
+        cp.append(str(checkpoint.picture))
+        checkpoints_data.append(cp)
+
+    return HttpResponse(json.dumps(checkpoints_data))
 
 @login_required(login_url='/login')
 def devices(request):
@@ -138,10 +155,9 @@ def newPosition(request):
                     # The user is Authentic
                     position = Position(latitude=lat,longitude=lon,speed=speed)
                     position.save()
-                    supervisor = Supervisor.objects.get(user = user.id)
-                    device = supervisor.devices.get(id = id_device)
+                    device = Device.objects.get(id = id_device)
                     device.positions.add(position)
-                    return HttpResponse(json.dumps("1"))
+                    return HttpResponse(json.dumps(1))
                 else:
                     # The User is not Active
                     message = 'Tu cuenta ha sido suspendida, contacta al administrador por favor.'
@@ -158,7 +174,37 @@ def newPosition(request):
 
 @login_required(login_url='/logout')
 def newCheckPoint(request):
-    pass
+    if request.method == 'POST':
+        try:
+            id_device = request.POST['id_device']
+            latitude = request.POST['latitude']
+            longitude = request.POST['longitude']
+            campo1 = request.POST['value_1']
+            campo2 = request.POST['value_2']
+            campo3 = request.POST['value_3']
+            picture = request.FILES['picture']
+            user=request.user
+            if user is not None:
+                if user.is_active:
+                    # The user is Authentic
+                    device = Device.objects.get(id = id_device)
+                    checkpoint = CheckPoint(latitude=latitude,longitude=longitude, campo1=campo1,campo2=campo2,campo3=campo3,picture=picture)
+                    checkpoint.save()
+                    device.checkPoint.add(checkpoint)
+                    device.save()
+                    return HttpResponse(json.dumps(1))
+                else:
+                    # The User is not Active
+                    message = 'Tu cuenta ha sido suspendida, contacta al administrador por favor.'
+                    return HttpResponse(json.dumps(message))
+            else:
+                # Is not User
+                message = 'Por favor revise que su usuario y contraseña sea la correcta.'
+                return HttpResponse(json.dumps(message))
+        except:
+            return HttpResponseRedirect('/logout/')
+    else:
+        return render_to_response('movilPost/new_check_point.html',  RequestContext(request))
 
 '''
 TRANSESPOL START
@@ -181,3 +227,5 @@ def transespol(request):
 '''
 TRANSESPOL END
 '''
+
+#cambiar las variables de con las que se recibe del HTML

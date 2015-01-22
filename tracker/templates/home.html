@@ -10,7 +10,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		{% for device in devices %}
-		$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?latlng='+{{device.positions.last.latitude}}+','+{{device.positions.last.longitude}},function(data){
+		url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+parseFloat({{device.positions.last.latitude}})+','+parseFloat({{device.positions.last.longitude}})
+		$.getJSON(url,function(data){
 			location_data = data.results[0].formatted_address;
 			$("#place-ubication-{{device.id}}").append('<h6>'+location_data+'</h6>');
 		})

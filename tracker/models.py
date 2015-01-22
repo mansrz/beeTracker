@@ -2,19 +2,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class CheckPoint(models.Model):
-    campo1 =  models.TextField(max_length=25, blank= True, null= True)
-    campo2 =  models.TextField(max_length=25, blank= True, null= True)
-    campo3 =  models.TextField(max_length=25, blank= True, null= True)
-    picture = models.ImageField(upload_to='checkPoint/%Y/%m/%d',verbose_name='Picture', null= True,  default='checkPoint/anonymous.png')
-
 class Position(models.Model):
     latitude =  models.FloatField(max_length=17)
     longitude =  models.FloatField(max_length=17)
     altitude =  models.TextField(max_length=12, blank= True, null= True)
     speed =  models.TextField(max_length=5, blank= True, null= True)
     date = models.DateTimeField(auto_now_add=True, blank=True)
-    checkPoint = models.ForeignKey(CheckPoint, related_name='event', blank= True, null= True)
 
     def __unicode__(self):
         return str(self.latitude)
@@ -23,8 +16,24 @@ class Position(models.Model):
         verbose_name = "Ubicación"
         verbose_name_plural = "Ubicaciones"
 
+class CheckPoint(models.Model):
+    latitude =  models.FloatField(max_length=17, blank= True, null= True)
+    longitude =  models.FloatField(max_length=17, blank= True, null= True)
+    campo1 =  models.TextField(max_length=25, blank= True, null= True)
+    campo2 =  models.TextField(max_length=25, blank= True, null= True)
+    campo3 =  models.TextField(max_length=25, blank= True, null= True)
+    picture = models.ImageField(upload_to='checkPoint/%Y/%m/%d',verbose_name='Picture', null= True,  default='checkPoint/anonymous.png')
+
+    def __unicode__(self):
+        return str(self.campo1)
+
+    class Meta:
+        verbose_name = "CheckPoint"
+        verbose_name_plural = "CheckPoints"
+
 class Device(models.Model):
     positions = models.ManyToManyField(Position, related_name='Positions', blank= True, null= True)
+    checkPoint = models.ManyToManyField(CheckPoint, related_name='CheckPoints', blank= True, null= True)
     name = models.TextField(max_length=20, blank= True, null= True)
     #supervisor = models.ForeignKey(Supervisor, related_name='Supervisor')
     status = models.BooleanField(default=True)

@@ -34,7 +34,6 @@
     function clearMarkers() {
         setAllMap(null);
     }
-
     function setAllMap(map) {
       for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
@@ -56,19 +55,19 @@
           var infowindow = new google.maps.InfoWindow({content:"<p width ='120px' height= '50px'><strong>"+data[3]+"</strong><br>"+data[2]+"<br>Lon: "+data[1]+"<br>Lat:"+data[0]+"</p>"});
 
           markers.push(marker);
-          // Change the center of map.
+          // Change thes center of map.
           if (devices_list.length==1){
-          Latlng = new google.maps.LatLng(data[0],data[1]);
-          map.setCenter(Latlng);
-          if (flagZoom1) {
-          map.setZoom(16);
-          flagZoom1=false;
-          flagZoom2=true;}}
+            Latlng = new google.maps.LatLng(data[0],data[1]);
+            map.setCenter(Latlng);
+            if (flagZoom1) {
+              map.setZoom(16);
+              flagZoom1=false;
+              flagZoom2=true;}}
           else{
             if (flagZoom2) {
-          map.setZoom(13);
-          flagZoom2=false;
-          flagZoom1=true;}
+              map.setZoom(13);
+              flagZoom2=false;
+              flagZoom1=true;}
           }
 
           google.maps.event.addListener(marker, 'mouseover', function(){
