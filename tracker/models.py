@@ -17,15 +17,15 @@ class Position(models.Model):
         verbose_name_plural = "Ubicaciones"
 
 class CheckPoint(models.Model):
-    latitude =  models.FloatField(max_length=17, blank= True, null= True)
-    longitude =  models.FloatField(max_length=17, blank= True, null= True)
+    latitude =  models.FloatField(max_length=17, default= 0.0)
+    longitude =  models.FloatField(max_length=17, default= 0.0)
     campo1 =  models.TextField(max_length=25, blank= True, null= True)
     campo2 =  models.TextField(max_length=25, blank= True, null= True)
     campo3 =  models.TextField(max_length=25, blank= True, null= True)
     picture = models.ImageField(upload_to='checkPoint/%Y/%m/%d',verbose_name='Picture', null= True,  default='checkPoint/anonymous.png')
 
     def __unicode__(self):
-        return str(self.campo1)
+        return self.campo1
 
     class Meta:
         verbose_name = "CheckPoint"
