@@ -61,11 +61,11 @@
 
             markers_checkpoint_{{device.id}}.push(marker)
           }   
-          var markerCluster = new MarkerClusterer(map, markers_checkpoint_{{device.id}});
+          markerCluster = new MarkerClusterer(map, markers_checkpoint_{{device.id}});
         });
         $('#hideCheckPoint-{{device.id}}').click(function(){
         deleteMarkers2()
-
+        markerCluster.clearMarkers();
         $('#hideCheckPoint-{{device.id}}').hide(200);
         $('#showCheckPoint-{{device.id}}').show(200);
         });

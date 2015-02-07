@@ -114,6 +114,7 @@ def newDevice(request):
             usuario = request.POST['username']
             clave = request.POST['password']
             name = request.POST['name']
+            id_device = request.POST['id_device']
             user = authenticate(username=usuario,password=clave)
             response = []
 
@@ -122,7 +123,7 @@ def newDevice(request):
                     auth_login(request, user)
                     # The user is Authentic
                     username = user.username
-                    device = Device(name = name)
+                    device = Device(name = name, description = id_device)
                     device.save()
                     supervisor = Supervisor.objects.get(user = user.id)
                     supervisor.devices.add(device)

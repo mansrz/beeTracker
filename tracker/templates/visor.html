@@ -13,13 +13,13 @@
    <div id="map"></div> 
 
    <script type="text/javascript"> 
-    var map;
+    var map = null;
+    var markerCluster = null;
     var markers =[];
     var devices_list = [];
     var url = '';
     var flagZoom1 = true;
     var flagZoom2 = true;
-    //var markerCluster = new MarkerClusterer(map, markers);
     {% for device in devices %}
     var flag{{device.id}}= false;
     {% endfor %}
