@@ -19,6 +19,7 @@ class Position(models.Model):
 class CheckPoint(models.Model):
     latitude =  models.FloatField(max_length=17, default= 0.0)
     longitude =  models.FloatField(max_length=17, default= 0.0)
+    date = models.DateTimeField(auto_now_add=True)
     campo1 =  models.TextField(max_length=25, blank= True, null= True)
     campo2 =  models.TextField(max_length=25, blank= True, null= True)
     campo3 =  models.TextField(max_length=25, blank= True, null= True)

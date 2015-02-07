@@ -48,7 +48,7 @@
             map : map,
             title : '{{device.name}}',
             icon: "{{STATIC_URL}}img/marker.png",
-            html:"<p width ='120px' height= '50px'><strong>"+data[i][2]+"</strong><br>"+data[i][3]+"<br>Lon: "+data[i][4]+"<img width ='120px' src='{{MEDIA_URL}}"+data[i][5]+"'>"
+            html:" [ "+(i+1)+" ]"+"<p width ='120px' height= '50px'><strong>"+data[i][2]+"</strong><br>"+data[i][3]+"<br>"+data[i][4]+"<br>"+"<img width ='120px' src='{{MEDIA_URL}}"+data[i][5]+"'><br>"+data[i][6]+"  ["+data[i][7]+"]"
             });
             // Set infoWindow
             var infowindow = new google.maps.InfoWindow();
@@ -61,6 +61,7 @@
 
             markers_checkpoint_{{device.id}}.push(marker)
           }   
+          var markerCluster = new MarkerClusterer(map, markers_checkpoint_{{device.id}});
         });
         $('#hideCheckPoint-{{device.id}}').click(function(){
         deleteMarkers2()

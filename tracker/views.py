@@ -8,6 +8,7 @@ from django.shortcuts import render, render_to_response, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login
 import json
+import datetime
 
 @login_required(login_url='/login')
 def lastLocation(request, id_device):
@@ -35,6 +36,8 @@ def checkPoints(request, id_device):
         cp.append(checkpoint.campo2)
         cp.append(checkpoint.campo3)
         cp.append(str(checkpoint.picture))
+        cp.append((str(checkpoint.date)).split('.')[0].split(' ')[0])
+        cp.append((str(checkpoint.date)).split('.')[0].split(' ')[1])
         checkpoints_data.append(cp)
 
     return HttpResponse(json.dumps(checkpoints_data))
