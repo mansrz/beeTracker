@@ -44,7 +44,7 @@
     setInterval(function(){
       clearMarkers();
       for(i =0; i<devices_list.length;i++){
-        url='/last_location/'+devices_list[i];
+        url='/last_location/'+devices_list[i]+'/';
         $.getJSON(url,function(data){
           var marker = new google.maps.Marker({
           position: new google.maps.LatLng(data[0],data[1]),

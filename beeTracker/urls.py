@@ -6,7 +6,7 @@ from django.contrib import admin
 from django.contrib.auth import logout
 
 admin.autodiscover()
-
+admin.site.site_header = 'BeeTracker Admin'
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'trackBee.views.home', name='home'),
