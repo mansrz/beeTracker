@@ -58,3 +58,6 @@ db.sqlite3
 # Deploy-dependent files
 /beeTracker/settings.py
 /beeTracker/wsgi.py
+
+# User-uploaded files
+/media
