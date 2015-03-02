@@ -60,9 +60,9 @@ WSGI_APPLICATION = 'beeTracker.wsgi.application'
 DATABASES = {
     'default': {
 	'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'beeTrackerPostgres',
-        'USER': 'beetrackerapp',
-        'PASSWORD': 'BeeTrackerP0stgr3s',
+        'NAME': 'FakeName',
+        'USER': 'FakeUser',
+        'PASSWORD': 'FakePassword',
         'HOST': 'localhost',
     }
 }

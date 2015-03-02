@@ -7,9 +7,9 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 """
 
-import os, sys
-BASE_DIR = '/var/www'
-sys.path.append(BASE_DIR+'/beeTracker')
+raise Exception('You must tune your own wsgi.py')
+
+import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "beeTracker.settings")
 
 from django.core.wsgi import get_wsgi_application

@@ -54,5 +54,7 @@ docs/_build/
 target/
 *~
 db.sqlite3
-settings.py
-wsgi.py
+
+# Deploy-dependent files
+/beeTracker/settings.py
+/beeTracker/wsgi.py
